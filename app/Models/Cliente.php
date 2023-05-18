@@ -19,6 +19,18 @@ class Cliente extends Model
         "pais",
         "tamano_de_cultivo",
         "user_id",
-        "activo"
+        "activo",
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function tarjetas()
+{
+    return $this->hasMany(TarjetaCliente::class, 'id_cliente', 'id');
+}
+
+    
+
 }

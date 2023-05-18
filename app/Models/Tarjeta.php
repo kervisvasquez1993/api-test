@@ -9,6 +9,11 @@ class Tarjeta extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "src_image"
+        "src_image",
     ];
+    public function clientes()
+    {
+        return $this->hasMany(TarjetaCliente::class, 'id_tarjeta', 'id');
+    }
+
 }

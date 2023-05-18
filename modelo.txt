@@ -1,0 +1,34 @@
+modelo : users 
+protected $fillable = [
+    'name',
+    "last_name",
+    'email',
+    'password',
+    "token",
+    "confirmado"
+];
+
+modelo : Cliente 
+protected $fillable = [
+    "nombre",
+    "apellido",
+    "empresa",
+    "numero_telefono",
+    "correo",
+    "cultivo",
+    "ubicacion_zona",
+    "pais",
+    "tamano_de_cultivo",
+    "user_id",
+    "activo"
+];
+
+modelo : Tarjeta
+protected $fillable = [
+    "src_image"
+];
+Modelo : TarjetaCliente
+protected $fillable = [
+    "id_cliente",
+    "id_tarjeta"
+];

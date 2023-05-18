@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TarjetaCliente;
 use Illuminate\Http\Request;
 
-class TarjetaClienteController extends Controller
+class TarjetaClienteController extends ApiController
 {
     /**
      * Display a listing of the resource.
