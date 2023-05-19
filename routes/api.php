@@ -22,13 +22,6 @@ Route::post('/register', [AuthController::class, 'register'])->name("register");
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/me', [AuthController::class, 'me'])->name("me");
-
-    // Route::get('users', 'UserController@index');
-    // Route::get('users/{id}', 'UserController@show');
-    // Route::post('users', 'UserController@store');
-    // Route::put('users/{id}', 'UserController@update');
-    // Route::delete('users/{id}', 'UserController@destroy');
-
 // Rutas para clientes
     Route::get("clientes", [ClienteController::class, "index"]);
     Route::get("clientes/{cliente}", [ClienteController::class, "show"]);
