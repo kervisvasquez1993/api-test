@@ -27,10 +27,8 @@ class Cliente extends Model
         return $this->belongsTo(User::class);
     }
     public function tarjetas()
-{
-    return $this->hasMany(TarjetaCliente::class, 'id_cliente', 'id');
-}
-
-    
+    {
+        return $this->hasMany(TarjetaCliente::class, 'id_cliente', 'id');
+    }
 
 }

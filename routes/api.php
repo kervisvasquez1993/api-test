@@ -31,12 +31,12 @@ Route::middleware('auth:api')->group(function () {
     Route::post("clientes", [ClienteController::class, "store"]);
 // Rutas para tarjetas
     Route::get('tarjetas', [TarjetaController::class, 'index']);
-    Route::get('tarjetas/{id}', [TarjetaController::class, 'show']);
+    Route::get('tarjetas/{tarjeta}', [TarjetaController::class, 'show']);
     Route::post('tarjetas', [TarjetaController::class, 'store']);
     Route::post('tarjetas/{tarjeta}/cliente', [TarjetaController::class, 'tarjetaCliente']);
     Route::post('cliente/{cliente}/tarjeta', [TarjetaController::class, 'clienteTarjeta']);
     Route::put('tarjetas/{id}', [TarjetaController::class, 'update']);
-    Route::delete('tarjetas/{id}', [TarjetaController::class, 'destroy']);
+    Route::delete('tarjetas/{tarjeta}', [TarjetaController::class, 'destroy']);
 
 // Rutas para la relación entre cliente y tarjeta
     // Route::get('clientes/{cliente}/tarjetas', 'ClienteTarjetaController@index');

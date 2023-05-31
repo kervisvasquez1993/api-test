@@ -11,6 +11,7 @@ class TarjetaCliente extends Model
     protected $fillable = [
         "id_cliente",
         "id_tarjeta",
+        "id_user"
     ];
 
     public function cliente()
@@ -22,5 +23,7 @@ class TarjetaCliente extends Model
     {
         return $this->belongsTo(Tarjeta::class, 'id_tarjeta', 'id');
     }
+
+    
 
 }
