@@ -10,6 +10,7 @@ class Tarjeta extends Model
     use HasFactory;
     protected $fillable = [
         "src_image",
+        "user_id"
     ];
     public function clientes()
     {

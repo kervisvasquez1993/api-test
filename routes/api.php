@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\TarjetaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TarjetaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,14 +26,17 @@ Route::middleware('auth:api')->group(function () {
     Route::get("clientes", [ClienteController::class, "index"]);
     Route::get("clientes/{cliente}", [ClienteController::class, "show"]);
     Route::put("clientes/{cliente}", [ClienteController::class, "update"]);
+    Route::get("clientes/{id}/cambiar-estado", [ClienteController::class, "cambiarEstado"]);
     Route::delete("clientes/{cliente}", [ClienteController::class, "destroy"]);
     Route::post("clientes", [ClienteController::class, "store"]);
 // Rutas para tarjetas
     Route::get('tarjetas', [TarjetaController::class, 'index']);
-    // Route::get('tarjetas/{id}', 'TarjetaController@show');
-    // Route::post('tarjetas', 'TarjetaController@store');
-    // Route::put('tarjetas/{id}', 'TarjetaController@update');
-    // Route::delete('tarjetas/{id}', 'TarjetaController@destroy');
+    Route::get('tarjetas/{id}', [TarjetaController::class, 'show']);
+    Route::post('tarjetas', [TarjetaController::class, 'store']);
+    Route::post('tarjetas/{tarjeta}/cliente', [TarjetaController::class, 'tarjetaCliente']);
+    Route::post('cliente/{cliente}/tarjeta', [TarjetaController::class, 'clienteTarjeta']);
+    Route::put('tarjetas/{id}', [TarjetaController::class, 'update']);
+    Route::delete('tarjetas/{id}', [TarjetaController::class, 'destroy']);
 
 // Rutas para la relación entre cliente y tarjeta
     // Route::get('clientes/{cliente}/tarjetas', 'ClienteTarjetaController@index');

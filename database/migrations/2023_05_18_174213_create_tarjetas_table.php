@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tarjetas', function (Blueprint $table) {
             $table->id();
             $table->string("src_img");
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

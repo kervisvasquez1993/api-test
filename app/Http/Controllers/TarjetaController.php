@@ -12,7 +12,20 @@ class TarjetaController extends ApiController
      */
     public function index()
     {
-        return "respuesta";
+        
+        $user = auth()->user();
+
+        try {
+            $clientes = $user->clientes->where("activo", $query)->values()->toArray();
+
+            if (empty($clientes)) {
+                return response()->json(['message' => "No hay Clientes registrados"], 201);
+            }
+
+            return response()->json(['data' => $clientes], 201);
+        } catch (Exception $e) {
+            return response()->json(['errors' => $e], 403);
+        }
     }
 
     /**
