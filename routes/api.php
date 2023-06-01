@@ -15,8 +15,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
  */
+
+
+// Ruta para la verificación de correo electrónico
+
+
+Route::get('register/verify/{token}', [AuthController::class, 'verify'])->name('verification.verify');
+// Route::get('register/verify/{token}', 'AuthController@verify')->name('verification.verify');
+
+Route::get('password/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [AuthController::class, 'reset'])->name('password.update');
+
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name("register");
+Route::post('/confirm-account', [AuthController::class, 'confirmAccount'])->name("confirmAccount");
 
 // Rutas para usuarios
 

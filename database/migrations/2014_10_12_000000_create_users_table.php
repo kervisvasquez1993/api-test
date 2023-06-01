@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('token')->nullable();
             $table->boolean('confirmed')->default(false);
+            $table->string('confirmation_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
