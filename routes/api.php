@@ -37,6 +37,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('cliente/{cliente}/tarjeta', [TarjetaController::class, 'clienteTarjeta']);
     Route::put('tarjetas/{id}', [TarjetaController::class, 'update']);
     Route::delete('tarjetas/{tarjeta}', [TarjetaController::class, 'destroy']);
+    Route::delete('tarjetas/generar-txt', [TarjetaController::class, 'descargarInformacionTxt']);
 
 // Rutas para la relación entre cliente y tarjeta
     // Route::get('clientes/{cliente}/tarjetas', 'ClienteTarjetaController@index');

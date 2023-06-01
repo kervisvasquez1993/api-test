@@ -54,21 +54,21 @@ class AuthController extends ApiController
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
-
+        $newEmailValue = "$request->email@netafim.com";
         $user = new User();
         $user->name = $request->name;
         $user->last_name = $request->last_name;
-        $user->email = $request->email;
+        $user->email = $newEmailValue;
         $user->password = bcrypt($request->password);
         $user->save();
-
-        return response()->json(['data' => 'User registered successfully'], 201);
+       
+        return response()->json(['message' => 'User registered successfully'], 201);
     }
 }
