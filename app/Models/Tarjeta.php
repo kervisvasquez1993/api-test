@@ -22,4 +22,9 @@ class Tarjeta extends Model
         return $this->hasMany(TarjetaCliente::class, 'id_tarjeta', 'id');
     }
 
+     public function tarjetaClientes()
+    {
+        return $this->hasMany(TarjetaCliente::class, 'id_tarjeta');
+    }
+
 }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Tarjeta;
-use App\Models\TarjetaCliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Models\TarjetaCliente;
 use Illuminate\Support\Facades\Storage;
 
 class TarjetaController extends ApiController
@@ -65,11 +66,7 @@ class TarjetaController extends ApiController
 
         return response()->json(['message' => 'Tarjeta Agregada con Exito', 'data' => $tarjeta], 201);
     }
-    public function update(Request $request, Tarjeta $tarjeta)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      */
@@ -146,7 +143,7 @@ class TarjetaController extends ApiController
     public function descargarInformacionTxt()
     {
         // Obtener el usuario logeado
-        $user = Auth::user();
+        $user = auth()->user();
 
         // Obtener todos los clientes asociados al usuario
         $clientes = Cliente::where('user_id', $user->id)->get();

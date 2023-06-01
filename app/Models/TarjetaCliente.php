@@ -23,7 +23,5 @@ class TarjetaCliente extends Model
     {
         return $this->belongsTo(Tarjeta::class, 'id_tarjeta', 'id');
     }
-
     
-
 }
