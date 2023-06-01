@@ -59,7 +59,7 @@ class TarjetaController extends ApiController
         ]);
 
         $tarjeta = Tarjeta::create([
-            'src_img' => Storage::disk('s3')->put('netafim', $request->file('src_img')),
+            'src_img' => Storage::disk('s3')->put('producto', $request->file('src_img'), 'public'),
             'user_id' => auth()->user()->id,
         ]);
 
@@ -124,12 +124,13 @@ class TarjetaController extends ApiController
     }
     public function clienteTarjeta(Request $request, Cliente $cliente)
     {
+        
         $request->validate([
-            'src_img' => 'required|image|max:2048',
+            'src_img' => 'required',
         ]);
 
         $tarjeta = Tarjeta::create([
-            'src_img' => Storage::disk('s3')->put('netafim', $request->file('src_img')),
+            'src_img' => Storage::disk('s3')->put('producto', $request->file('src_img'), "public"),
             'user_id' => auth()->user()->id,
         ]);
         $tarjetaCliente = TarjetaCliente::create([
