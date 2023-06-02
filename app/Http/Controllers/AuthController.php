@@ -53,32 +53,32 @@ class AuthController extends ApiController
         return response()->json(Auth::user());
     }
 
-    // public function register(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required',
-    //         'last_name' => 'required',
-    //         'email' => 'required|unique:users',
-    //         'password' => 'required|min:6|confirmed',
-    //     ]);
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-    //     if ($validator->fails()) {
-    //         return response()->json(['error' => $validator->errors()], 422);
-    //     }
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
 
-    //     $newEmailValue = $request->email . '@netafim.com';
+        $newEmailValue = $request->email . '@netafim.com';
 
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->last_name = $request->last_name;
-    //     $user->email = $newEmailValue;
-    //     $user->password = bcrypt($request->password);
-    //     $user->save();
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $newEmailValue;
+        $user->password = bcrypt($request->password);
+        $user->save();
 
-    //     event(new Registered($user));
+        event(new Registered($user));
 
-    //     return response()->json(['message' => 'User registered successfully'], 201);
-    // }
+        return response()->json(['message' => 'User registered successfully'], 201);
+    }
 
     public function register(Request $request)
     {
