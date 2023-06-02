@@ -26,22 +26,17 @@ class AuthController extends ApiController
         }
 
         $user = $request->user();
-        if ($user->confirmation_token === null) {
-            $tokenResult = $user->createToken('Personal Access Token');
 
-            $token = $tokenResult->token;
-            $token->save();
+        $tokenResult = $user->createToken('Personal Access Token');
 
-            return response()->json([
-                'access_token' => $tokenResult->accessToken,
-                'data' => $user,
-            ]);}
-            else{
-                return response()->json([
-                'message' => "Verifica la cuenta para acceder",
-                
-            ]);
-            }
+        $token = $tokenResult->token;
+        $token->save();
+
+        return response()->json([
+            'access_token' => $tokenResult->accessToken,
+            'data' => $user,
+        ]);
+
     }
 
     public function logout(Request $request)
@@ -97,7 +92,7 @@ class AuthController extends ApiController
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
-        $updateEmail ="$request->email@netafim.com";
+        $updateEmail = "$request->email@netafim.com";
         $user = new User();
         $user->name = $request->name;
         $user->last_name = $request->last_name;

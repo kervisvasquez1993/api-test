@@ -12,11 +12,12 @@ class ClienteController extends ApiController
      */
     public function index(Request $request)
     {
-        $query = $request->query("activos");
+        // $query = $request->query("activos");
         $user = auth()->user();
 
         try {
-            $clientes = $user->clientes->where("activo", $query)->values()->toArray();
+            // $clientes = $user->clientes->where("activo", $query)->values()->toArray();
+            $clientes = $user->clientes->all();
 
             if (empty($clientes)) {
                 return response()->json(['message' => "No hay Clientes registrados"], 201);
@@ -92,19 +93,20 @@ class ClienteController extends ApiController
      */
     public function cambiarEstado($id)
     {
-
+        
+        $cliente = Cliente::findOrFail($id);
         $user_login_id = auth()->user()->id;
         if ($user_login_id != $cliente->user_id) {
             return response()->json(["error" => "No tiene permiso efectuar esta accion"], 400);
         }
-        $cliente = Cliente::findOrFail($id);
+        
 
         // Invertir el estado activo
         $cliente->activo = !$cliente->activo;
 
         $cliente->save();
 
-        return response()->json(['data' => 'Estado del cliente actualizado correctamente']);
+        return response()->json(['data' => $cliente, 'message' => "Estado del cliente actualizado correct"]);
     }
 
     public function destroy(Cliente $cliente)
