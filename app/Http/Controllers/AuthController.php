@@ -80,42 +80,42 @@ class AuthController extends ApiController
         return response()->json(['message' => 'User registered successfully'], 201);
     }
 
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required',
+    //         'last_name' => 'required',
+    //         'email' => 'required|unique:users',
+    //         'password' => 'required|min:6|confirmed',
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
-        $updateEmail = "$request->email@netafim.com";
-        $user = new User();
-        $user->name = $request->name;
-        $user->last_name = $request->last_name;
-        $user->email = $updateEmail;
-        $user->password = bcrypt($request->password);
-        $user->confirmation_token = sha1($request->email . time());
+    //     if ($validator->fails()) {
+    //         return response()->json(['error' => $validator->errors()], 422);
+    //     }
+    //     $updateEmail = "$request->email@netafim.com";
+    //     $user = new User();
+    //     $user->name = $request->name;
+    //     $user->last_name = $request->last_name;
+    //     $user->email = $updateEmail;
+    //     $user->password = bcrypt($request->password);
+    //     $user->confirmation_token = sha1($request->email . time());
 
-        $user->save();
+    //     $user->save();
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['token' => $user->confirmation_token]
-        );
+    //     $verificationUrl = URL::temporarySignedRoute(
+    //         'verification.verify',
+    //         now()->addMinutes(60),
+    //         ['token' => $user->confirmation_token]
+    //     );
 
-        // Envío del correo de verificación
-        Mail::send('emails.verify', ['verificationUrl' => $verificationUrl], function ($message) use ($user) {
-            $message->to($user->email);
-            $message->subject('Verificación de cuenta');
-        });
+    //     // Envío del correo de verificación
+    //     Mail::send('emails.verify', ['verificationUrl' => $verificationUrl], function ($message) use ($user) {
+    //         $message->to($user->email);
+    //         $message->subject('Verificación de cuenta');
+    //     });
 
-        return response()->json(['message' => 'User registered successfully'], 201);
-    }
+    //     return response()->json(['message' => 'User registered successfully'], 201);
+    // }
 
     public function verify(Request $request, $token)
     {
